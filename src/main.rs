@@ -19,7 +19,7 @@ struct Config {
 struct TemplateContext {
     message_count: u64,
     guild_count: u32,
-    user_count: u32,
+    user_count: u64,
 }
 
 
