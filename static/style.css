@@ -1,0 +1,146 @@
+:root {
+    --black: #000000;
+    --white: #FFFFFF;
+}
+
+:root.free {
+    --accent: #3498DB;
+    --accent-dark: #1E84B1;
+}
+
+:root.premium {
+    --accent: #CAA652;
+    --accent-dark: #B79341;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: unset;
+    text-decoration: none;
+}
+
+body {
+    font-family: Arial, serif;
+    font-size: 25pt;
+    text-align: center;
+}
+
+h1, h2 {
+    margin-block: .5em;
+}
+
+.button {
+    padding: calc(.5em - 5px) calc(3em - 5px);
+    margin-inline: 1ch;
+    display: inline-block;
+    margin: 1em;
+    background: var(--background);
+    color: var(--color);
+    border: 5px solid var(--background);
+}
+
+.button:hover {
+    background: var(--color);
+    color: var(--background);
+}
+
+.button--light {
+    --background: var(--white);
+    --color: var(--accent);
+}
+
+.button--dark {
+    --color: var(--white);
+    --background: var(--accent);
+}
+
+.hero {
+    height: calc(100vh - 10em);
+    padding: 5em;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25%;
+    color: var(--white);
+    margin-bottom: 1em;
+}
+
+.hero img {
+    width: 100%;
+    max-width: 10em;
+}
+
+.selling-points {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.selling-point {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.selling-point__content {
+    width: 100%;
+    margin-inline: 1em;
+}
+
+.selling-point__media {
+    width: 100%;
+    margin-inline: 1em;
+}
+
+footer {
+    background: var(--accent-dark);
+    padding: 1em;
+    color: var(--white);
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+}
+
+.stat {
+    flex: 1 1 0;
+    font-size: 2em;
+}
+
+.stat__icon {
+    margin-block: 1rem;
+    font-size: 1.5em;
+}
+
+.stat hr {
+    width: 5ch;
+    margin: 1rem auto;
+    border: none;
+    background: var(--white);
+    height: 2px;
+}
+
+.stat__name {
+    font-size: .5em;
+}
+
+.buttons {
+    display: flex;
+}
+
+.buttons > .button {
+    flex: 1 1 0;
+    padding-inline: unset;
+}
+
+.legal {
+    font-size: .75em;
+}
