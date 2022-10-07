@@ -15,8 +15,10 @@ struct Config {
     bind_addr: Option<SocketAddr>,
 }
 
-#[derive(serde::Deserialize, serde::Serialize, Clone, Copy, Debug)]
+#[derive(serde::Deserialize, serde::Serialize, Clone, Copy, Default, Debug)]
 struct TemplateContext {
+    premium_guild_count: u32,
+    premium_user_count: u64,
     message_count: u64,
     guild_count: u32,
     user_count: u64,
@@ -49,6 +51,8 @@ static TERA: Lazy<tera::Tera> = Lazy::new(|| {
 });
 
 static TEMPLATE_CONTEXT: RwLock<TemplateContext> = RwLock::new(TemplateContext {
+    premium_guild_count: 0,
+    premium_user_count: 0,
     message_count: 0,
     guild_count: 0,
     user_count: 0
