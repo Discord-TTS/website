@@ -1,6 +1,6 @@
 use std::{net::SocketAddr, path::PathBuf, io::ErrorKind};
 
-use axum::{response::{IntoResponse, Response}, Json, http, extract::Path};
+use axum::{response::{IntoResponse, Response}, body::{Bytes, Full}, extract::Path, Json, http};
 use http::{HeaderMap, StatusCode};
 use once_cell::sync::Lazy;
 use parking_lot::RwLock;
@@ -130,17 +130,18 @@ async fn static_req(Path(mut path): Path<String>) -> Result<impl IntoResponse, E
         base_path
     };
 
-    let file_contents = match tokio::fs::read_to_string(&static_path).await {
-        Ok(contents) => contents,
+    let file_contents = match tokio::fs::read(&static_path).await {
+        Ok(contents) => Full::new(Bytes::from(contents)),
         Err(not_found) if not_found.kind() == ErrorKind::NotFound => {
             tracing::info!("Static file not found: {path}");
 
             return Response::builder()
                 .status(StatusCode::NOT_FOUND)
-                .body(String::new()).map_err(Error::BuildResponse)
+                .body(Full::new(Bytes::new()))
+                .map_err(Error::BuildResponse)
         },
         Err(err) => return Err(Error::Io(err))
     };
 
-    build_html_response(file_contents)
+    Response::builder().body(file_contents).map_err(Error::BuildResponse)
 }
