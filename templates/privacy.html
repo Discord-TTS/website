@@ -7,5 +7,14 @@
 {% endblock %}
 {% block content %}
     <h1>Privacy Policy</h1>
-    {# TODO Privacy policy goes here #}
+    <article>
+        <p>TTS Bot collects message content, server IDs, user IDs, command name + time of invoke, and any settings set using the <code>/set</code> command or by any other means.</p>
+        <p>TTS Bot needs this data to function correctly</p>
+        <ul >
+            <li>Message content in the setup channel is required for basic function and caching. <strong>This is also shared with Google for TTS</strong></li>
+            <li>Server IDs, user IDs, and settings are for storing in the database so TTS Bot can be configurable.</li>
+            <li>Command name + time of invoke are collected for analytics, so development can be focused in the right places.</li>
+        </ul>
+        <p>If you have any concerns, please contact the development team via the support server (<code>/invite</code>) or contact <code>Gnome!#6669</code> directly for data removal or security concerns.</p>
+    </article>
 {% endblock %}
