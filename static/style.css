@@ -1,6 +1,7 @@
 :root {
     --black: #000000;
     --white: #FFFFFF;
+    --light-grey: #E0E0E0;
 }
 
 :root.free {
@@ -27,6 +28,13 @@ body {
     font-family: Arial, serif;
     font-size: 25pt;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
 }
 
 h1, h2 {
@@ -49,8 +57,8 @@ h1, h2 {
 }
 
 .button--light {
-    --background: var(--white);
     --color: var(--accent);
+    --background: var(--white);
 }
 
 .button--dark {
@@ -100,14 +108,16 @@ h1, h2 {
 
 footer {
     background: var(--accent-dark);
-    padding: 1em;
+    padding: 0 1em 1em 1em;
     color: var(--white);
+    margin-top: 1em;
 }
 
 .stats {
     display: flex;
     justify-content: center;
     gap: 2em;
+    margin-top: 1em;
 }
 
 .stat {
@@ -143,4 +153,46 @@ footer {
 
 .legal {
     font-size: .75em;
+}
+
+.main-nav {
+    background: var(--accent);
+    height: 2em;
+    color: var(--white);
+    font-size: .75em;
+}
+
+.main-nav img {
+    height: 1em;
+}
+
+.main-nav ul {
+    list-style: none;
+}
+
+.main-nav a:hover {
+    color: var(--light-grey);
+}
+
+.main-nav, .main-nav ul {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.content {
+    max-width: 75ch;
+    margin-inline: auto;
+    padding-inline: 1em;
+    text-align: left;
+    flex: 1;
+}
+
+.content a {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+}
+
+.content a:visited {
+    text-decoration-color: var(--accent-dark);
 }

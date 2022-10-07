@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" class="{% block theme %}free{% endblock %}">
+<head>
+    <meta charset="UTF-8">
+    {% block opengraph %}
+        <meta property="og:site_name" content="TTS Bot">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="/static/logo-free.png">
+        <meta property="theme-color" content="#3498DB">
+    {% endblock %}
+    <link rel="stylesheet" href="/static/style.css">
+    <title>{% block title %}{% endblock %} | TTS Bot</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+<nav class="main-nav">
+    <img src="/static/logo-free.png" alt="TTS Bot logo">
+    <ul>
+        <li><a href="/">TTS Bot</a></li>
+        <li><a href="/premium">Premium</a></li>
+    </ul>
+</nav>
+<main class="content">
+    {% block content %}{% endblock %}
+</main>
+<footer>
+    <div class="buttons">
+        <a href="https://discord.com/oauth2/authorize?client_id=513423712582762502&permissions=36719617&scope=bot%20applications.commands" class="button button--light">Invite</a>
+        <a href="/premium" class="button button--light">Premium</a>
+        <a href="https://discord.gg/zWPWwQC" class="button button--light">Support</a>
+        <a href="https://github.com/Discord-TTS/Bot" class="button button--light">Github</a>
+    </div>
+    <p class="legal">
+        <a href="https://gist.github.com/GnomedDev/9b68d31abdd555064a8b5ee5a9568e50">Terms of Service</a>
+        |
+        <a href="https://gist.github.com/GnomedDev/a21892a9932db37c266d3ea23107ee8d">Privacy Policy</a>
+    </p>
+</footer>
+</body>
+</html>

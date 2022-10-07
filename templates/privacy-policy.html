@@ -1,0 +1,11 @@
+{% extends "template.html" %}
+{% block title %}Privacy Policy{% endblock %}
+{% block opengraph %}
+    <meta property="og:title" content="Privacy Policy">
+    <meta property="og:description" content="{# TODO Opengraph description goes here #}">
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <h1>Privacy Policy</h1>
+    {# TODO Privacy policy goes here #}
+{% endblock %}
