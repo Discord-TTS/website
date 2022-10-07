@@ -1,10 +1,10 @@
-use std::net::SocketAddr;
+use std::{net::SocketAddr, path::PathBuf, io::ErrorKind};
 
-use axum::{response::IntoResponse, Json, http::HeaderMap};
+use axum::{response::{IntoResponse, Response}, Json, http, extract::Path};
+use http::{HeaderMap, StatusCode};
 use once_cell::sync::Lazy;
 use parking_lot::RwLock;
 use tera::{Tera, Context};
-
 
 #[derive(serde::Deserialize)]
 struct Config {
@@ -20,6 +20,23 @@ struct TemplateContext {
     message_count: u64,
     guild_count: u32,
     user_count: u64,
+}
+
+#[derive(Debug, thiserror::Error)]
+enum Error {
+    #[error("Build Response Error: {0}")]
+    BuildResponse(#[from] http::Error),
+    #[error("IO Error: {0}")]
+    Io(#[from] std::io::Error),
+}
+
+impl IntoResponse for Error {
+    fn into_response(self) -> Response {
+        tracing::error!("{self}");
+
+        StatusCode::INTERNAL_SERVER_ERROR
+            .into_response()
+    }
 }
 
 
@@ -42,6 +59,16 @@ fn context() -> Context {
     Context::from_serialize(*TEMPLATE_CONTEXT.read()).unwrap()
 }
 
+fn render_page(template_name: &str) -> String {
+    TERA.render(template_name, &context())
+        .expect("Template missing!")
+}
+
+fn build_html_response(content: String) -> Result<http::Response<String>, Error> {
+    Response::builder()
+        .header(http::header::CONTENT_TYPE, "text/html")
+        .body(content).map_err(Error::BuildResponse)
+}
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -49,7 +76,11 @@ async fn main() -> anyhow::Result<()> {
 
     let app = axum::Router::new()
         .route("/", axum::routing::get(index))
+        .route("/tos", axum::routing::get(tos))
+        .route("/premium", axum::routing::get(premium))
+        .route("/privacy", axum::routing::get(privacy))
         .route("/index.html", axum::routing::get(index))
+        .route("/static/*path", axum::routing::get(static_req))
         .route("/update_stats", axum::routing::post(update_stats));
 
     axum::Server::bind(&CONFIG.bind_addr.map_or_else(|| "0.0.0.0:8080".parse(), Ok)?)
@@ -61,22 +92,55 @@ async fn main() -> anyhow::Result<()> {
 }
 
 
+async fn index() -> impl IntoResponse {
+    build_html_response(render_page("index.html"))
+}
+
+async fn premium() -> impl IntoResponse {
+    build_html_response(render_page("premium.html"))
+}
+
+async fn tos() -> impl IntoResponse {
+    build_html_response(render_page("tos.html"))
+}
+
+async fn privacy() -> impl IntoResponse {
+    build_html_response(render_page("privacy.html"))
+}
+
 async fn update_stats(Json(stats): Json<TemplateContext>, headers: HeaderMap) -> impl IntoResponse {
     let auth_header = headers.get(http::header::AUTHORIZATION).map(|v| v.to_str().ok());
 
     if auth_header.flatten() != Some(&CONFIG.stats_key) {
-        return http::StatusCode::UNAUTHORIZED;
+        return StatusCode::UNAUTHORIZED;
     };
 
     *TEMPLATE_CONTEXT.write() = stats;
-    http::StatusCode::NO_CONTENT
+    StatusCode::NO_CONTENT
 }
 
-async fn index() -> impl IntoResponse {
-    let content = TERA.render("index.html", &context())
-        .expect("index.html template missing!");
+async fn static_req(Path(mut path): Path<String>) -> Result<impl IntoResponse, Error> {
+    if path.starts_with('/') {
+        path.remove(0);
+    }
 
-    axum::response::Response::builder()
-        .header(http::header::CONTENT_TYPE, "text/html")
-        .body(content).unwrap()
+    let static_path = {
+        let mut base_path = PathBuf::from("./static");
+        base_path.push(&path);
+        base_path
+    };
+
+    let file_contents = match tokio::fs::read_to_string(&static_path).await {
+        Ok(contents) => contents,
+        Err(not_found) if not_found.kind() == ErrorKind::NotFound => {
+            tracing::info!("Static file not found: {path}");
+
+            return Response::builder()
+                .status(StatusCode::NOT_FOUND)
+                .body(String::new()).map_err(Error::BuildResponse)
+        },
+        Err(err) => return Err(Error::Io(err))
+    };
+
+    build_html_response(file_contents)
 }

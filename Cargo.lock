@@ -1288,12 +1288,12 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "axum",
- "http",
  "once_cell",
  "parking_lot",
  "serde",
  "serde_json",
  "tera",
+ "thiserror",
  "tokio",
  "toml",
  "tracing",
