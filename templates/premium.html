@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" class="premium">
+<head>
+    <meta charset="UTF-8">
+    <meta property="og:title" content="TTS Bot Premium">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/static/logo-premium.png">
+    <meta property="theme-color" content="#CAA652">
+    <title>TTS Bot Premium</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="shortcut icon" href="/static/logo-free.png">
+</head>
+<body>
+<header class="hero">
+    <img src="/static/logo-premium.png" alt="TTS Bot premium logo">
+    <div>
+        <h1>TTS Bot Premium</h1>
+        <p>
+            Get access to more voices and support the development of TTS Bot
+        </p>
+        <a href="https://www.patreon.com/Gnome_the_Bot_Maker" class="button button--light">Buy Premium</a>
+    </div>
+</header>
+<main>
+    <p>
+        Support the development and hosting of TTS Bot and get access to TTS Bot Premium, including more modes,
+        many more voices, and extra options such as TTS translation.
+    </p>
+    <div class="selling-points">
+        <div class="selling-point">
+            <div class="selling-point__content">
+                <h2>More Voices</h2>
+                <p>
+                    Get access to Google Cloud and Amazon Polly voices.
+                </p>
+            </div>
+            <!-- TODO Add video -->
+        </div>
+        <div class="selling-point">
+            <!-- TODO Add GIF, video or image -->
+            <div class="selling-point__content">
+                <h2>Translation</h2>
+                <p>
+                    TTS Bot Premium can automatically translate everything into a set language before speaking.
+                </p>
+            </div>
+        </div>
+        <div class="selling-point">
+            <div class="selling-point__content">
+                <h2>Support the Development and Hosting of TTS Bot</h2>
+                <p>
+                    Support the development and hosting by purchasing premium, allowing for even more modes, voices, and
+                    settings to be added while existing features are maintained and upgraded!
+                </p>
+            </div>
+            <!-- TODO Add GIF, video or image -->
+        </div>
+    </div>
+    <a href="https://www.patreon.com/Gnome_the_Bot_Maker" class="button button--dark">Buy Premium</a>
+</main>
+<footer>
+    <div class="stats">
+        <div class="stat">
+            <span class="stat__icon material-icons-round" aria-hidden="true">&#xe875;</span>
+            <p>{{ premium_guild_count }}</p>
+            <hr>
+            <p class="stat__name">Premium Servers</p>
+        </div>
+        <div class="stat">
+            <span class="stat__icon material-icons-round" aria-hidden="true">&#xf233;</span>
+            <p>{{ premium_user_count }}</p>
+            <hr>
+            <p class="stat__name">Premium Users</p>
+        </div>
+        <div class="stat">
+            <span class="stat__icon material-icons-round" aria-hidden="true">&#xec0b;</span>
+            <p>{{ message_count }}</p>
+            <hr>
+            <p class="stat__name">Messages TTS'd yesterday</p>
+        </div>
+    </div>
+    <div class="buttons">
+        <a href="https://discord.com/oauth2/authorize?client_id=513423712582762502&permissions=36719617&scope=bot%20applications.commands" class="button button--light">Invite</a>
+        <a href="https://www.patreon.com/Gnome_the_Bot_Maker" class="button button--light">Buy Premium</a>
+        <a href="https://discord.gg/zWPWwQC" class="button button--light">Support</a>
+        <a href="https://github.com/Discord-TTS/Bot" class="button button--light">GitHub</a>
+    </div>
+    <p class="legal">
+        <a href="/tos">Terms of Service</a>
+        |
+        <a href="/privacy">Privacy Policy</a>
+    </p>
+</footer>
+</body>
+</html>
