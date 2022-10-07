@@ -81,6 +81,7 @@ h1, h2 {
 .hero img {
     width: 100%;
     max-width: 10em;
+    border-radius: 1em;
 }
 
 .selling-points {
