@@ -2,6 +2,7 @@
     --black: #000000;
     --white: #FFFFFF;
     --light-grey: #E0E0E0;
+    --max-width: 150ch;
 }
 
 :root.free {
@@ -26,7 +27,6 @@ a {
 
 body {
     font-family: Arial, serif;
-    font-size: 25pt;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -66,6 +66,10 @@ h1, h2 {
     --background: var(--accent);
 }
 
+.logo {
+    border-radius: 15%;
+}
+
 .hero {
     height: calc(100vh - 10em);
     padding: 5em;
@@ -81,7 +85,12 @@ h1, h2 {
 .hero img {
     width: 100%;
     max-width: 10em;
-    border-radius: 1em;
+}
+
+main {
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding-inline: 1em;
 }
 
 .selling-points {
@@ -95,6 +104,10 @@ h1, h2 {
     display: flex;
     align-items: center;
     width: 100%;
+}
+
+.selling-point:nth-child(2n) {
+    flex-direction: row-reverse;
 }
 
 .selling-point__content {
@@ -112,6 +125,11 @@ footer {
     padding: 0 1em 1em 1em;
     color: var(--white);
     margin-top: 1em;
+}
+
+.stats, .buttons {
+    max-width: var(--max-width);
+    margin-inline: auto;
 }
 
 .stats {
@@ -132,7 +150,7 @@ footer {
 }
 
 .stat hr {
-    width: 5ch;
+    width: max(40%, 5ch);
     margin: 1rem auto;
     border: none;
     background: var(--white);
@@ -160,11 +178,12 @@ footer {
     background: var(--accent);
     height: 2em;
     color: var(--white);
-    font-size: .75em;
+    font-size: 1.25em;
 }
 
-.main-nav img {
+.main-nav .logo {
     height: 1em;
+    margin-left: .25em;
 }
 
 .main-nav ul {
@@ -182,9 +201,6 @@ footer {
 }
 
 .content {
-    max-width: 75ch;
-    margin-inline: auto;
-    padding-inline: 1em;
     text-align: left;
     flex: 1;
 }
@@ -196,4 +212,30 @@ footer {
 
 .content a:visited {
     text-decoration-color: var(--accent-dark);
+}
+
+@media (max-width: 400px) {
+    .hero, .stats, .buttons {
+        flex-direction: column;
+    }
+
+    .selling-point:nth-child(n) {
+        flex-direction: column-reverse;
+    }
+
+    .stat__icon {
+        display: none;
+    }
+
+    .stat hr {
+        margin-block: .5rem;
+    }
+
+    .buttons {
+        margin-block: .5em;
+    }
+
+    .buttons > .button {
+        margin-block: .5em;
+    }
 }

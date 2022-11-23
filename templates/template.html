@@ -8,13 +8,15 @@
         <meta property="og:image" content="/static/logo-free.png">
         <meta property="theme-color" content="#3498DB">
     {% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
+    <link rel="shortcut icon" href="/static/logo-free.png">
     <title>{% block title %}{% endblock %} | TTS Bot</title>
     {% block head %}{% endblock %}
 </head>
 <body>
 <nav class="main-nav">
-    <img src="/static/logo-free.png" alt="TTS Bot logo">
+    <a href="/" class="logo"><img src="/static/logo-free.png" alt="TTS Bot logo" class="logo"></a>
     <ul>
         <li><a href="/">TTS Bot</a></li>
         <li><a href="/premium">Premium</a></li>
