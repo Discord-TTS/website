@@ -1,8 +1,9 @@
 :root {
-    --black: #000000;
-    --white: #FFFFFF;
+    --foreground: #000000;
+    --background: #FFFFFF;
     --light-grey: #E0E0E0;
     --max-width: 150ch;
+    --background-foreground: var(--background);
 }
 
 :root.free {
@@ -13,6 +14,15 @@
 :root.premium {
     --accent: #CAA652;
     --accent-dark: #B79341;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --foreground: #FFFFFF;
+        --background: #121215;
+        --light-grey: #383838;
+        --background-foreground: #000000;
+    }
 }
 
 *, *::before, *::after {
@@ -31,6 +41,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background: var(--background);
+    color: var(--foreground);
 }
 
 h1 {
@@ -56,24 +68,24 @@ code {
     margin-inline: 1ch;
     display: inline-block;
     margin: 1em;
-    background: var(--background);
-    color: var(--color);
-    border: 5px solid var(--background);
+    background: var(---background);
+    color: var(---color);
+    border: 5px solid var(---background);
 }
 
 .button:hover {
-    background: var(--color);
-    color: var(--background);
+    background: var(---color);
+    color: var(---background);
 }
 
 .button--light {
-    --color: var(--accent);
-    --background: var(--white);
+    ---color: var(--accent);
+    ---background: var(--background-foreground);
 }
 
 .button--dark {
-    --color: var(--white);
-    --background: var(--accent);
+    ---color: var(--background-foreground);
+    ---background: var(--accent);
 }
 
 .logo {
@@ -88,7 +100,7 @@ code {
     align-items: center;
     justify-content: center;
     gap: 25%;
-    color: var(--white);
+    color: var(--background-foreground);
     margin-bottom: 1em;
 }
 
@@ -133,7 +145,7 @@ main {
 footer {
     background: var(--accent-dark);
     padding: 0 1em 1em 1em;
-    color: var(--white);
+    color: var(--background-foreground);
     margin-top: 1em;
 }
 
@@ -163,7 +175,7 @@ footer {
     width: max(40%, 5ch);
     margin: 1rem auto;
     border: none;
-    background: var(--white);
+    background: var(--background-foreground);
     height: 2px;
 }
 
@@ -187,7 +199,7 @@ footer {
 .main-nav {
     background: var(--accent);
     height: 2em;
-    color: var(--white);
+    color: var(--background-foreground);
     font-size: 1.25em;
 }
 
