@@ -41,6 +41,16 @@ h1, h2 {
     margin-block: .5em;
 }
 
+main ul, main ol {
+    padding-left: 1.5em;
+}
+
+code {
+    background: var(--light-grey);
+    border-radius: .25em;
+    padding: .1em .25em;
+}
+
 .button {
     padding: calc(.5em - 5px) calc(3em - 5px);
     margin-inline: 1ch;
